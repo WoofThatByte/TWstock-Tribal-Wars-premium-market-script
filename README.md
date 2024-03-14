@@ -25,7 +25,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-<b>TWStock</b> is an open source <b>Chrome extension</b> for Tribal Wars to help you buy the premium resources faster in early game.  It helps you to interact with the inputs elements in the Stock Market page. Works with the following links:
+<b>TWStock</b> is an semi-automatic open source <b>Chrome extension</b> for Tribal Wars to help you buy the premium resources faster in early game.  It helps you to interact with the inputs elements in the Stock Market page. Works with the following links:
 
  "https://*.triburile.ro/*screen=market*mode=exchange*"
  <br />
@@ -57,12 +57,33 @@ Completly stealth:
 ### Installation
 1. Install Chrome Browser
 2. Open Chrome -> go to Manage Extensions -> Check Developer mode -> Load unpacked -> Select the folder
-3. Activate extension (toggle button above  Premium page)
+3. Activate extension (toggle button above the Premium page)
 4. Open Tribal Wars -> Market -> Stock exchange
 
 ### How It  Works 
 1. Extension consist of two  pages:
-   * Premium -  View to manipulate stock exchange inputs
-   * Junk  -  
+   * Premium - View to manipulate stock exchange inputs
+   * Junk - View  with  some more  or less usefull calculators like: How much resources has been lost, Time to backstab enemy, Time to autosplit under 10 minutes
+  
+
+
+
+<img src="https://github.com/WoofThatByte/TWstock/assets/64849119/84e3d6a4-0223-4b31-85c5-69431a074997" alt="premium" width="400" height="250">
+
+
+
+
+2. Premium view:
+   * You can enable/disable the automatic refresh for the stock market page. Automatic refresh is set in miliseconds using the input element
+   * You can set how much wood, stone or iron you want to buy. By default: 10.000
+   * If refresh is enabled the page wil refresh everytime untill you click in one of the three inptus elements of the stock market
+   * You can click only one input 
+   * When you click the input the extension will fetch the available quantity in the range you set (Default: 10.000)
+   * The quantity is multiplied according to exchange rate. If the exchange rate is 64 wood / 1 premium  point and you set 2.000 to buy, you  will get the maximum 1.984 wood if more than 2000 wood is available the time you clicked. (2000/64 = rounded to 31. Then 31*64=1984).
+
+<b>This  is semiautomatic</b>. You set value you want to buy -> Click input element -> logic behind will  get  the value for you  so you  dont have to type in  ->  enter -> enter!
+ 
+ 3. Junk view:
+    * 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

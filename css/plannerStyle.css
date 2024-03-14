@@ -1,0 +1,52 @@
+main#plannerId{
+    width: 90%;
+    height: 330px;
+    padding: 10px;
+    margin: 0;
+    position: absolute;
+}
+
+main#plannerId div#resourcesCalc{
+  width: 80%;
+  height: auto;
+  margin: auto;
+
+
+}
+
+main#plannerId div#resourcesCalc .resourcesInput{
+  text-align: center;
+  width: 50px;
+  padding: 0px;
+}
+
+main#plannerId div#resourcesCalc div.resource-container{
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically center align items */
+}
+
+
+main#plannerId div#backstabCalc{
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+main#plannerId div#backstabCalc .backstabInput{
+  text-align: center;
+  width: 100px;
+  padding: 0px;
+}
+
+main#plannerId div#autosplitCalc{
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+main#plannerId div#autosplitCalc .autosplitInput{
+  text-align: center;
+  width: 100px;
+  padding: 0px;
+}

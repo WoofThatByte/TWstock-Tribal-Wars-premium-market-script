@@ -1,0 +1,112 @@
+main#homeId{
+    width: auto;
+    height: 330px;
+    padding: 10px;
+    margin: 0;
+    position: absolute;
+}
+
+main#homeId div#timp{
+  font-size: 14px;
+}
+
+main#homeId div.center{
+  width: 80%;
+  height: 80;
+  margin: auto;
+ 
+}
+
+main#homeId div.centerElements{
+  width: 90%;
+  margin: auto;
+}
+
+main#homeId div#timp input[type=checkbox]{
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  margin: 0;
+ 
+
+}
+
+main#homeId div#timp label.switch {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 70px;
+  height: 30px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  float: left;
+
+}
+
+main#homeId div#timp label.switch:after {
+  content: '';
+  position: absolute;  
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+main#homeId div#timp input:checked + label.switch {
+  background: #0a323c;
+}
+
+main#homeId div#timp input:checked + label.switch:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+main#homeId div#timp label.switch:active:after {
+  width: 30px;
+}
+
+input#refreshStockInput[type=text] {
+  width: 25%;
+  height: 30px;
+  position: relative;
+  float: left;
+  padding: 12px 20px;
+  margin-left: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+main#homeId div#timp span{
+  width: 40%;
+  margin-left: 10px;
+  position: relative;
+  float: left;
+  line-height: 30px;
+}
+
+main#homeId div#exchangeRate{
+  height: 80;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+
+}
+
+div#exchangeRate .premium-exchange input.exchangeInput{
+  width: 70%;
+  height: 25px;
+  padding: 12px 20px;
+  background: #0a323c;
+  border: 1px  solid #052229;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}

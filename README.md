@@ -21,7 +21,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## ABOUT TWStock - The premium extension for the premium market
+## TWstock - The premium extension for the premium market
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
@@ -82,8 +82,13 @@ Completly stealth:
    * The quantity is multiplied according to exchange rate. If the exchange rate is 64 wood / 1 premium  point and you set 2.000 to buy, you  will get the maximum 1.984 wood if more than 2000 wood is available the time you clicked. (2000/64 = rounded to 31. Then 31*64=1984).
 
 <b>This  is semiautomatic</b>. You set value you want to buy -> Click input element -> logic behind will  get  the value for you  so you  dont have to type in  ->  enter -> enter!
+
+
+<img src="https://github.com/WoofThatByte/TWstock/assets/64849119/a45cf8a0-5654-4260-9b70-13f69bd29d04" alt="junk" width="400" height="250">
  
  3. Junk view:
-    * 
+    * Insert the units number to get the total resource
+    * Set the time for backstab calculator in the format that has been provided
+    * Set the time for autosplit calculator in the format that has been provided
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

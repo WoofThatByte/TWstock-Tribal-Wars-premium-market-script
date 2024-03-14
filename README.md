@@ -25,7 +25,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-<b>TWStock</b> is an open source <b>Chrome extension</b> for Tribal Wars to help you buy the premium resources faster in early game. Works with the following links:
+<b>TWStock</b> is an open source <b>Chrome extension</b> for Tribal Wars to help you buy the premium resources faster in early game.  It helps you to interact with the inputs elements in the Stock Market page. Works with the following links:
 
  "https://*.triburile.ro/*screen=market*mode=exchange*"
  <br />
@@ -38,6 +38,7 @@ Completly stealth:
 * The injected/content script runs in an isolate world. An isolated world is a private execution environment that isn't accessible to the page or other extensions. A practical consequence of this isolation is that JavaScript variables in an extension's content scripts are not visible to the host page or other extensions' content scripts. The concept was originally introduced with the initial launch of Chrome, providing isolation for browser tabs.
 * No interaction with the UI. The stock market web page is not modified. 
 * Integrated in the Chrome browser as an extension :accessibility:
+* All in all, cannot be detected!
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -46,7 +47,22 @@ Completly stealth:
 ### Built With
 
 * Javascript
-* Chrome
-* JQuery
+* HTML
+* CSS
+
+### Works With
+
+* Chrome Browser
+
+### Installation
+1. Install Chrome Browser
+2. Open Chrome -> go to Manage Extensions -> Check Developer mode -> Load unpacked -> Select the folder
+3. Activate extension (toggle button above  Premium page)
+4. Open Tribal Wars -> Market -> Stock exchange
+
+### How It  Works 
+1. Extension consist of two  pages:
+   * Premium -  View to manipulate stock exchange inputs
+   * Junk  -  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

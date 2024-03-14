@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/WoofThatByte/TWstock/assets/64849119/026ddf9a-bb46-4c11-b45a-e8fa0a8397a0" alt="Logo" width="400" height="300">
   </a>
 
   <h3 align="center">Tribal Wars helper for the premium market</h3>

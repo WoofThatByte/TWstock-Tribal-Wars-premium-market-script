@@ -12,9 +12,6 @@
   <h3 align="center">Tribal Wars helper for the premium market</h3>
 
   <p align="center">
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://github.com/WoofThatByte/TWstock">View App</a>
     ·
     <a href="https://github.com/WoofThatByte/TWstock/issues">Report Bug</a>
@@ -27,7 +24,6 @@
 <!-- ABOUT THE PROJECT -->
 ## TWstock - The premium extension for the premium market
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 <b>TWStock</b> is an semi-automatic open source <b>Chrome extension</b> for Tribal Wars to help you buy the premium resources faster in early game.  It helps you to interact with the inputs elements in the Stock Market page. Works with the following links:
 

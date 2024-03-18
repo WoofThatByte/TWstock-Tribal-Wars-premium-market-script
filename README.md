@@ -37,10 +37,9 @@
 Completly stealth:
 * The injected/content script runs in an isolate world. An isolated world is a private execution environment that isn't accessible to the page or other extensions. A practical consequence of this isolation is that JavaScript variables in an extension's content scripts are not visible to the host page or other extensions' content scripts. The concept was originally introduced with the initial launch of Chrome, providing isolation for browser tabs.
 * No interaction with the UI. The stock market web page is not modified. 
-* Integrated in the Chrome browser as an extension :accessibility:
-* All in all, cannot be detected!
+* Integrated in Chrome browser as an extension :accessibility:
 
-<b>If you experience issues try to restart the web page</b>
+<b>If you experience issues try to refresh the web page</b>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

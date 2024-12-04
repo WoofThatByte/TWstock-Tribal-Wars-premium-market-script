@@ -31,7 +31,8 @@
       "matches": [
         "https://*.triburile.ro/*screen=market*mode=exchange*",
         "https://*.tribalwars.co.uk/*screen=market*mode=exchange*",
-        "https://*.tribalwars.net/*screen=market*mode=exchange*"],
+        "https://*.tribalwars.net/*screen=market*mode=exchange*",
+        "https://*.die-staemme.de/*screen=market*mode=exchange*"],
       "js": ["content_script.js"]
     },
     {

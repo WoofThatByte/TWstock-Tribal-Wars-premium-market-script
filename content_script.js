@@ -41,6 +41,9 @@ chrome.storage.sync.get('extensionEnabled', function(result) {
 				// Get the value from the <td> element
 				//var stockValue = stockElement.textContent.trim();
 				var stockValue =  keyValue;
+				//total of stock
+				var unitsAvailable = stockElement.textContent;
+				console.log('Total stock available: ' + unitsAvailable);
 				//get total of units  that can be bought with premium points
 				var unitsValue  = unitsElement.unitsValue;
 				//get premium point
@@ -48,7 +51,7 @@ chrome.storage.sync.get('extensionEnabled', function(result) {
 				//calculate how much stock I can buy  according to exchange rate. 
 				//I am  not interested in buying  leftover. 
 				//If with  1  premium  point I can buy 64, then I will  buy  multiple of  64  for stock
-				let result = calculateMaxUnitsPurchase(stockValue, premiumValue, unitsValue);
+				let result = calculateMaxUnitsPurchase(stockValue, premiumValue, unitsValue, unitsAvailable);
 				
 				//buy everything 
 				inputElement.value = result.maxUnitsToBuy !== 0 ? result.maxUnitsToBuy : '';
@@ -105,15 +108,15 @@ chrome.storage.sync.get('extensionEnabled', function(result) {
 	
 
 
-// Retrieve stored value for 'refreshValue' from Chrome storage
-chrome.storage.sync.get(['exchangeWoodValue', 'exchangeStoneValue', 'exchangeIronValue'], (result) => {
-	// Update inputElementWood value
-	updateInputElement(result.exchangeWoodValue,inputElementWood, stockElementWood, getUnitsWood);
-	// Update inputElementStone value
-	updateInputElement(result.exchangeStoneValue,inputElementStone, stockElementStone, getUnitsStone);
-	// Update inputElementIron value
-	updateInputElement(result.exchangeIronValue,inputElementIron, stockElementIron, getUnitsIron);
-});
+		// Retrieve stored value for 'refreshValue' from Chrome storage
+		chrome.storage.sync.get(['exchangeWoodValue', 'exchangeStoneValue', 'exchangeIronValue'], (result) => {
+			// Update inputElementWood value
+			updateInputElement(result.exchangeWoodValue,inputElementWood, stockElementWood, getUnitsWood);
+			// Update inputElementStone value
+			updateInputElement(result.exchangeStoneValue,inputElementStone, stockElementStone, getUnitsStone);
+			// Update inputElementIron value
+			updateInputElement(result.exchangeIronValue,inputElementIron, stockElementIron, getUnitsIron);
+		});
 
 
 
@@ -223,11 +226,15 @@ function handleSwitchStatusChange(isChecked, reloadInterval, focusCheckFunction 
 }
 
 
-function calculateMaxUnitsPurchase(totalUnits, cost, unitsValue) {
+function calculateMaxUnitsPurchase(totalUnits, cost, unitsValue, unitsAvailable) {
 	//cost per unit in premium points. 1 premium point for 64 units
 	var costPerUnit = cost / unitsValue; 
+
+	//adjust for availability
+	var totalUnitsCanBuy = Math.min(totalUnits,unitsAvailable);
+
     // Calculate the total cost
-    let totalCost = costPerUnit * totalUnits;
+    let totalCost = costPerUnit * totalUnitsCanBuy;
 
     // Calculate the maximum number of units you can buy
     let maxUnitsToBuy = Math.floor(totalCost);
@@ -236,6 +243,11 @@ function calculateMaxUnitsPurchase(totalUnits, cost, unitsValue) {
     let leftoverAmount = totalCost - maxUnitsToBuy;
 
 	let  totalMaxUnitsToBuy  =  maxUnitsToBuy *  unitsValue;
+	
+	//load the available stock if units to buy equals zero
+	if(totalMaxUnitsToBuy == 0){
+		totalMaxUnitsToBuy = unitsAvailable;
+	}
 
     return {
         maxUnitsToBuy: totalMaxUnitsToBuy,

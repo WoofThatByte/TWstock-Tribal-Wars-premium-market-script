@@ -1,5 +1,4 @@
-
-  // Check the value of extensionEnabled before executing the script logic
+ // Check the value of extensionEnabled before executing the script logic
 chrome.storage.sync.get('extensionEnabled', function(result) {
     var enabled = result.extensionEnabled;
     if (enabled) {

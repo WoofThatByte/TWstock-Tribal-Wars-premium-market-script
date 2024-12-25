@@ -10,6 +10,18 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     }
 });
 
+// Listen for enableEcnomoyMode button
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    if (message.enableEconomyModeChecked !== undefined) {
+        // Store switch status in Chrome storage
+        chrome.storage.sync.set({ 'enableEconomyModeChecked': message.enableEconomyModeChecked });
+        console.log('enable economy button: ' + message.enableEconomyModeChecked);
+    }
+    else{
+        console.log('enable economy button - message undefined');
+    }
+});
+
 //listen for stock exchange values
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     // Check if the message contains the value for exchangeWood
@@ -44,6 +56,18 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
                 console.error("Error saving exchangeIron to chrome.storage.sync:", chrome.runtime.lastError);
             } else {
                 console.log("exchangeIron saved to chrome.storage.sync successfully.");
+            }
+        });
+    }
+
+      // Check if the message contains the value for storageCapacity
+      if (message.storageCapacity !== undefined) {
+        // Save storageCapacity to chrome.storage.sync
+        chrome.storage.sync.set({ storageCapacity: message.storageCapacity }, function() {
+            if (chrome.runtime.lastError) {
+                console.error("Error saving storageCapacity to chrome.storage.sync:", chrome.runtime.lastError);
+            } else {
+                console.log("storageCapacity saved to chrome.storage.sync successfully.");
             }
         });
     }

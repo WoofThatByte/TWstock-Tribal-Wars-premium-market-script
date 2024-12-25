@@ -4,9 +4,15 @@
     
 </head>
 <main id="homeId">
-    <div id="timp"  class="center">      
+    <div id="economyMode" class="centerEconomyMode">
+        <div class="centerElements">
+            <span>Activate economy mode</span>
+            <input type="checkbox" id="enableEconomyMode" /><label class="switch" id="switchLabel" for="enableEconomyMode">Toggle</label>
+        </div>
+    </div>
+    <div id="timp" class="center">      
             <h4 style="font-weight:normal; justify-content: center; display: flex;">Activate / Deactivate automatic page refresh</h4>
-            <div class="centerElements">
+        <div class="centerElements">
             <input type="checkbox" id="disableStockRefresh" /><label class="switch" id="switchLabel" for="disableStockRefresh">Toggle</label>
             <input id="refreshStockInput" type="text" name="refreshTimeName" placeholder="time" disabled>
             <span>ms (Min: 700ms)</span>
@@ -21,25 +27,25 @@
             </colgroup>
             <tbody>
                 <tr>
-                    <th style="padding-bottom: 20px;"><img src="images/wood_21x18.png" class="" data-title="Lemn"> Wood</th>
-                    <th style="padding-bottom: 20px;"><img src="images/stone_21x18.png" class="" data-title="Argila"> Stone</th>
-                    <th style="padding-bottom: 20px;"><img src="images/iron_21x18.png" class="" data-title="Fier"> Iron</th>
+                    <th style="padding-bottom: 20px;"><img style="vertical-align: middle;" src="images/wood_21x18.png" class="" data-title="Lemn"> Wood</th>
+                    <th style="padding-bottom: 20px;"><img style="vertical-align: middle;"  src="images/stone_21x18.png" class="" data-title="Argila"> Stone</th>
+                    <th style="padding-bottom: 20px;"><img style="vertical-align: middle;"  src="images/iron_21x18.png" class="" data-title="Fier"> Iron</th>
                 </tr>
                 <tr>
                     <td style="font-size: 20px;text-align: center;">
-                        <div style="display: inline-block;"><span id="woodUnitValue">0</span> <img src="images/wood_18x16.png"></div>
-                        <div style="display: inline-block;">⇄</div>
-                        <div style="display: inline-block;"><span id="woodPointValue">0</span> <img src="images/premium.png"></div>
+                        <div style="display: inline-block;vertical-align: middle;"><span id="woodUnitValue">0</span> <img src="images/wood_18x16.png"></div>
+                        <div style="display: inline-block;vertical-align: middle;">⇄</div>
+                        <div style="display: inline-block;vertical-align: middle;"><span id="woodPointValue">0</span> <img src="images/premium.png"></div>
                     </td>
                     <td style="font-size: 20px;text-align: center;">
-                        <div style="display: inline-block;"><span id="stoneUnitValue">0</span> <img src="images/stone_18x16.png"></div>
-                        <div style="display: inline-block;">⇄</div>
-                        <div style="display: inline-block;"><span id="stonePointValue">0</span> <img src="images/premium.png"></div>
+                        <div style="display: inline-block;vertical-align: middle;"><span id="stoneUnitValue">0</span> <img src="images/stone_18x16.png"></div>
+                        <div style="display: inline-block;vertical-align: middle;">⇄</div>
+                        <div style="display: inline-block;vertical-align: middle;"><span id="stonePointValue">0</span> <img src="images/premium.png"></div>
                     </td>
                     <td style="font-size: 20px;text-align: center;">
-                        <div style="display: inline-block;"><span id="ironUnitValue">0</span> <img src="images/iron_18x16.png"></div>
-                        <div style="display: inline-block;">⇄</div>
-                        <div style="display: inline-block;"><span id="ironPointValue">0</span> <img src="images/premium.png"></div>
+                        <div style="display: inline-block;vertical-align: middle;"><span id="ironUnitValue">0</span> <img src="images/iron_18x16.png"></div>
+                        <div style="display: inline-block;vertical-align: middle;">⇄</div>
+                        <div style="display: inline-block;vertical-align: middle;"><span id="ironPointValue">0</span> <img src="images/premium.png"></div>
                     </td>
                 </tr>
                 <tr>
@@ -50,10 +56,15 @@
                     <th><input type="text" id="exchangeStoneInput" class="exchangeInput"></th>
                     <th><input type="text" id="exchangeIronInput" class="exchangeInput"></th>
                 </tr>
+                <tr>
+                    <th colspan="3" style="font-size: 16px;">
+                        <div style="display: inline-block;vertical-align: middle;"><span id="storageCapacityTitle">Maximum storage capacity: </span></div>
+                        <div style="display: inline-block;vertical-align: middle;"><img src="images/maxStorageImage.png"></div>
+                        <div style="display: inline-block;vertical-align: middle;"><span id="storageCapacityValue">400000</span> </div>
+                    </th>
+                </tr>
             </tbody>
         </table>
-    </div>
-        
-    
+    </div>   
 </main>  
 </html>

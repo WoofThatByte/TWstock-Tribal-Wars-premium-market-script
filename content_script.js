@@ -18,6 +18,9 @@ chrome.storage.sync.get('extensionEnabled', function(result) {
   var stockElementStone = document.getElementById('premium_exchange_stock_stone');
   var stockElementIron = document.getElementById('premium_exchange_stock_iron');
 
+  //storage element
+  var storageElement = document.getElementById('storage');
+
 
 	// Empty all input fields when any input field is focused
 	function emptyInputFields() {
@@ -34,7 +37,7 @@ chrome.storage.sync.get('extensionEnabled', function(result) {
 	}
 
 	// Function to update inputElementWood.value with stockValue
-	function updateInputElement(keyValue,inputElement,stockElement, unitsElement) {
+	function updateInputElement(keyValue, storageCapacity, inputElement,stockElement, unitsElement) {
 			
 			if (inputElement && stockElement && document.activeElement === inputElement) {
 				// Get the value from the <td> element
@@ -47,15 +50,34 @@ chrome.storage.sync.get('extensionEnabled', function(result) {
 				var unitsValue  = unitsElement.unitsValue;
 				//get premium point
 				var premiumValue  = unitsElement.premiumValue;
-				//calculate how much stock I can buy  according to exchange rate. 
-				//I am  not interested in buying  leftover. 
-				//If with  1  premium  point I can buy 64, then I will  buy  multiple of  64  for stock
-				let result = calculateMaxUnitsPurchase(stockValue, premiumValue, unitsValue, unitsAvailable);
-				
-				//buy everything 
-				inputElement.value = result.maxUnitsToBuy !== 0 ? result.maxUnitsToBuy : '';
-				
-				
+				//get the total storage capacity
+				var totalStorageCapacity = storageCapacity;
+
+				// Retrieve switch status from Chrome storage
+				chrome.storage.sync.get(['enableEconomyModeChecked'], function(result) {
+					var isChecked = result.enableEconomyModeChecked;
+					// Execute handleSwitchStatusChange only if refreshValue is defined
+					if (isChecked !== undefined && isChecked === true) {
+						//calculate how much stock I can buy  according to exchange rate. 
+						//I am  not interested in buying  leftover. 
+						//If with  1  premium  point I can buy 64, then I will  buy  multiple of  64  for stock
+						console.log("economy mode is checked");
+						let valueResult = calculateMaxUnitsToPurchaseEconomyMode(stockValue, premiumValue, unitsValue, unitsAvailable, totalStorageCapacity);
+						//buy everything 
+						inputElement.value = valueResult.maxUnitsToBuy !== 0 ? valueResult.maxUnitsToBuy : '';
+					}
+					else if(isChecked !== undefined && isChecked === false)
+					{
+						console.log("economy mode is disabled");
+						let valueResult = calculateMaxUnitsToPurchase(stockValue, premiumValue, unitsValue, unitsAvailable, totalStorageCapacity);
+						//buy everything 
+						inputElement.value = valueResult.maxUnitsToBuy !== 0 ? valueResult.maxUnitsToBuy : '';
+					}
+					else{
+						console.log("enableEconomyModeChecked is " + isChecked);
+					}
+				});
+					
 				
 			}
 	}
@@ -104,29 +126,33 @@ chrome.storage.sync.get('extensionEnabled', function(result) {
 		var getUnitsStone = extractDivValues('premium_exchange_rate_stone');
 		//get  iron
 		var getUnitsIron = extractDivValues('premium_exchange_rate_iron');
-	
 
-
-		// Retrieve stored value for 'refreshValue' from Chrome storage
-		chrome.storage.sync.get(['exchangeWoodValue', 'exchangeStoneValue', 'exchangeIronValue'], (result) => {
-			// Update inputElementWood value
-			updateInputElement(result.exchangeWoodValue,inputElementWood, stockElementWood, getUnitsWood);
-			// Update inputElementStone value
-			updateInputElement(result.exchangeStoneValue,inputElementStone, stockElementStone, getUnitsStone);
-			// Update inputElementIron value
-			updateInputElement(result.exchangeIronValue,inputElementIron, stockElementIron, getUnitsIron);
-		});
-
-
-
+		//get storage capacity
+		var getStorageCapacity = storageElement.textContent;
 
 			// Send the values to the popup script
 			
 			chrome.runtime.sendMessage({
 				exchangeWood: getUnitsWood,
 				exchangeStone: getUnitsStone,
-				exchangeIron: getUnitsIron
+				exchangeIron: getUnitsIron,
+				storageCapacity: getStorageCapacity
 			});
+
+		// Retrieve stored value for 'refreshValue' from Chrome storage
+		chrome.storage.sync.get(['exchangeWoodValue', 'exchangeStoneValue', 'exchangeIronValue', 'storageCapacity'], (result) => {
+			// Update inputElementWood value
+			updateInputElement(result.exchangeWoodValue, result.storageCapacity, inputElementWood, stockElementWood, getUnitsWood);
+			// Update inputElementStone value
+			updateInputElement(result.exchangeStoneValue, result.storageCapacity, inputElementStone, stockElementStone, getUnitsStone);
+			// Update inputElementIron value
+			updateInputElement(result.exchangeIronValue, result.storageCapacity, inputElementIron, stockElementIron, getUnitsIron);
+		});
+
+
+
+
+		
 
 		
 	}
@@ -197,7 +223,7 @@ function executeScriptLogic() {
 // Function to handle changes in disableStockRefreshChecked value
 function handleSwitchStatusChange(isChecked, reloadInterval, focusCheckFunction ) {
 		if (isChecked === true) {
-			console.log('disableStockRefreshChecked: true');
+			console.log('disableStockRefreshChecked: ' + isChecked);
 			// Retrieve refresh value from Chrome storage
 			chrome.storage.sync.get('refreshValue', function(result) {
 				var refreshValue = result.refreshValue;
@@ -215,7 +241,7 @@ function handleSwitchStatusChange(isChecked, reloadInterval, focusCheckFunction 
 				}
 			});
 		} else {
-			console.log('disableStockRefreshChecked: false');
+			console.log('disableStockRefreshChecked is ' + isChecked);
 			// Stop the interval if it's running
 			if (reloadInterval) {
 				clearInterval(reloadInterval);
@@ -225,7 +251,12 @@ function handleSwitchStatusChange(isChecked, reloadInterval, focusCheckFunction 
 }
 
 
-function calculateMaxUnitsPurchase(totalUnits, cost, unitsValue, unitsAvailable) {
+function calculateMaxUnitsToPurchaseEconomyMode(totalUnits, cost, unitsValue, unitsAvailable, storageCapacity) {
+
+	////////////////
+	//ECONOMY MODE//
+	////////////////
+
 	//cost per unit in premium points. 1 premium point for 64 units
 	var costPerUnit = cost / unitsValue; 
 
@@ -244,12 +275,29 @@ function calculateMaxUnitsPurchase(totalUnits, cost, unitsValue, unitsAvailable)
 	let  totalMaxUnitsToBuy  =  maxUnitsToBuy *  unitsValue;
 	
 	//load the available stock if units to buy equals zero
+	/*
 	if(totalMaxUnitsToBuy == 0){
 		totalMaxUnitsToBuy = unitsAvailable;
 	}
+	*/
 
     return {
-        maxUnitsToBuy: totalMaxUnitsToBuy,
-        leftoverAmount: leftoverAmount.toFixed(2),
+        maxUnitsToBuy: totalMaxUnitsToBuy
+    };
+}
+
+function calculateMaxUnitsToPurchase(totalUnits, cost, unitsValue, unitsAvailable, storageCapacity) {
+
+	////////////////
+	//STANDARD MODE//
+	////////////////
+
+	//adjust for availability
+	var totalUnitsAvailable = Math.min(totalUnits,unitsAvailable);
+	//var totalUnitsCanBuy = Math.min(totalUnitsAvailable,storageCapacity);
+
+
+    return {
+        maxUnitsToBuy: totalUnitsAvailable
     };
 }
